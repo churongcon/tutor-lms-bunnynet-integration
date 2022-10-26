@@ -1,0 +1,16 @@
+{
+    "name": "tutor/bunny-net-integration",
+    "description": "Tutor LMS BunnyNet Integration",
+    "autoload": {
+        "psr-4": {
+            "Tutor\\BunnyNetIntegration\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Themeum",
+            "email": "support@themeum.com"
+        }
+    ],
+    "require": {}
+}
