@@ -89,7 +89,6 @@ class BunnyNet {
 	 */
 	public static function filter_course_video( $content ) {
 		$bunny_video_id = self::is_bunnynet_video_source();
-
 		if ( false !== $bunny_video_id ) {
 			?>
 			<div class="tutor-video-player">
@@ -111,13 +110,25 @@ class BunnyNet {
 	 * @return void
 	 */
 	public static function meta_box_item( $post ):void {
-		$video          = maybe_unserialize( get_post_meta( $post->ID, '_video', true ) );
-		$video_source   = tutor_utils()->avalue_dot( 'source', $video, 'bunnynet' );
-		$bunnyet_source = tutor_utils()->avalue_dot( 'source_bunnynet', $video );
+		$video           = maybe_unserialize( get_post_meta( $post->ID, '_video', true ) );
+		$video_source    = tutor_utils()->avalue_dot( 'source', $video, 'bunnynet' );
+		$bunnynet_source = tutor_utils()->avalue_dot( 'source_bunnynet', $video );
+		$style           = 'bunnynet' === $video_source ? '' : 'display:none';
 		?>
-		<div class="tutor-mt-16 video-metabox-source-item video_source_wrap_bunnynet tutor-dashed-uploader" style="<?php tutor_video_input_state( $video_source, 'bunnynet' ); ?>">
-			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnyet_source ); ?>" placeholder="<?php esc_html_e( 'Place your bunnynet video code here', 'tutor-lms-bunnynet-integration' ); ?>">
+		<div class="tutor-mt-16 video-metabox-source-item video_source_wrap_bunnynet tutor-dashed-uploader" style="<?php echo esc_attr( $style ); ?>">
+			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place your bunnynet video code here', 'tutor-lms-bunnynet-integration' ); ?>">
 		</div>
+		<script>
+			var bunnyNet = document.querySelector('.video_source_wrap_bunnynet');
+			var videoSource = document.querySelector('.tutor_lesson_video_source.no-tutor-dropdown');
+			if (videoSource) {
+				console.log(videoSource.value);
+				if (videoSource.value == -1) {
+					bunnyNet.style = 'display:none;'
+				}
+			}
+			
+		</script>
 		<?php
 	}
 
