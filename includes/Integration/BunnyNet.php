@@ -67,15 +67,7 @@ class BunnyNet {
 	public static function filter_lesson_video( $content ) {
 		$bunny_video_id = self::is_bunnynet_video_source();
 		if ( false !== $bunny_video_id ) {
-			ob_start();
-			?>
-			<div class="tutor-video-player">
-				<div style="position: relative; padding-top: 56.25%;">
-					<iframe src="https://iframe.mediadelivery.net/embed/<?php echo esc_attr( $bunny_video_id ); ?>?autoplay=false" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
-				</div>
-			</div>
-			<?php
-			$content = ob_get_clean();
+			$content = self::get_embed_video( $bunny_video_id );
 		}
 		return $content;
 	}
@@ -83,27 +75,24 @@ class BunnyNet {
 	/**
 	 * Filter course intro video if source if bunny net
 	 *
-	 * @param sting $content course intro video content.
+	 * @since v1.0.0
+	 *
+	 * @param string $content course intro video content.
 	 *
 	 * @return string
 	 */
 	public static function filter_course_video( $content ) {
 		$bunny_video_id = self::is_bunnynet_video_source();
 		if ( false !== $bunny_video_id ) {
-			?>
-			<div class="tutor-video-player">
-				<div style="position: relative; padding-top: 56.25%;">
-					<iframe src="https://iframe.mediadelivery.net/embed/<?php echo esc_html( $bunny_video_id ); ?>?autoplay=false" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
-				</div>
-			</div>
-			<?php
-			$content = ob_get_clean();
+			$content = self::get_embed_video( $bunny_video_id );
 		}
 		return $content;
 	}
 
 	/**
 	 * Add bunny net source field on the meta box
+	 *
+	 * @since v1.0.0
 	 *
 	 * @param object $post  post object.
 	 *
@@ -119,6 +108,7 @@ class BunnyNet {
 			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place your bunnynet video code here', 'tutor-lms-bunnynet-integration' ); ?>">
 		</div>
 		<script>
+			// Don't show input field if video source is not bunny net.
 			var bunnyNet = document.querySelector('.video_source_wrap_bunnynet');
 			var videoSource = document.querySelector('.tutor_lesson_video_source.no-tutor-dropdown');
 			if (videoSource) {
@@ -127,7 +117,6 @@ class BunnyNet {
 					bunnyNet.style = 'display:none;'
 				}
 			}
-			
 		</script>
 		<?php
 	}
@@ -135,6 +124,8 @@ class BunnyNet {
 	/**
 	 * If video source is bunny net then let not
 	 * load the template from tutor
+	 *
+	 * @since v1.0.0
 	 *
 	 * @param boolean $should_load should load template.
 	 * @param string  $template  template name.
@@ -151,6 +142,8 @@ class BunnyNet {
 	/**
 	 * Check video source is bunnynet
 	 *
+	 * @since v1.0.0
+	 *
 	 * @return mixed  video source if exists otherwise false
 	 */
 	public static function is_bunnynet_video_source() {
@@ -165,5 +158,26 @@ class BunnyNet {
 			}
 		}
 		return $response;
+	}
+
+	/**
+	 * Get embedded bunny net video
+	 *
+	 * @since v1.0.0
+	 *
+	 * @param string $bunny_video_id video id for embedding.
+	 *
+	 * @return string video content
+	 */
+	private static function get_embed_video( $bunny_video_id ):string {
+		ob_start();
+		?>
+		<div class="tutor-video-player">
+			<div style="position: relative; padding-top: 56.25%;">
+				<iframe src="https://iframe.mediadelivery.net/embed/<?php echo esc_attr( $bunny_video_id ); ?>?autoplay=false" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }

@@ -43,7 +43,7 @@ class AdminNotice {
 	 * @return void
 	 */
 	public static function show_admin_notice() {
-        $plugin_data = TutorLMSBunnyNetIntegration::meta_data();
-        require_once $plugin_data['views'] . '/notice/notice.php'; 
+		$plugin_data = TutorLMSBunnyNetIntegration::meta_data();
+		require_once $plugin_data['views'] . '/notice/notice.php';
 	}
 }
