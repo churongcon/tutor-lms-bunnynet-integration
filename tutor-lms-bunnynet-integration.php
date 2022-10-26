@@ -16,6 +16,7 @@
  */
 
 use Tutor\BunnyNetIntegration\AdminNotice\AdminNotice;
+use Tutor\BunnyNetIntegration\Integration\BunnyNet;
 
 if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 
@@ -55,9 +56,9 @@ if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 			}
 			// register_activation_hook( __FILE__, array( __CLASS__, 'register_activation' ) );
 			// register_deactivation_hook( __FILE__, array( __CLASS__, 'register_deactivation' ) );
-			// add_action( 'init', array( __CLASS__, 'load_textdomain' ) );
 
-			$this->load_packages();
+			add_action( 'plugins_loaded', array( $this, 'load_packages' ) );
+			add_action( 'init', array( __CLASS__, 'load_textdomain' ) );
 		}
 
 		/**
@@ -96,10 +97,21 @@ if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 		 * @return void
 		 */
 		public function load_packages() {
-			// If tutor is not active then return.
+			// If tutor is not active then load notice only.
 			if ( ! function_exists( 'tutor' ) ) {
 				new AdminNotice();
+			} else {
+				new BunnyNet();
 			}
+		}
+
+		/**
+		 * Load plugin text domain
+		 *
+		 * @return void
+		 */
+		public static function load_textdomain() {
+			load_plugin_textdomain( 'easy-poll', false, plugin_dir_path( __FILE__ ) . 'languages/' );
 		}
 	}
 	// trigger.
