@@ -64,7 +64,7 @@ class BunnyNet {
 	 *
 	 * @return string
 	 */
-	public function filter_lesson_video( $content ) {
+	public static function filter_lesson_video( $content ) {
 		$bunny_video_id = self::is_bunnynet_video_source();
 		if ( false !== $bunny_video_id ) {
 			ob_start();
@@ -106,11 +106,11 @@ class BunnyNet {
 	/**
 	 * Add bunny net source field on the meta box
 	 *
-	 * @param \WP_Post $post  post object.
+	 * @param object $post  post object.
 	 *
 	 * @return void
 	 */
-	public static function meta_box_item( \WP_Post $post ):void {
+	public static function meta_box_item( $post ):void {
 		$video          = maybe_unserialize( get_post_meta( $post->ID, '_video', true ) );
 		$video_source   = tutor_utils()->avalue_dot( 'source', $video, 'bunnynet' );
 		$bunnyet_source = tutor_utils()->avalue_dot( 'source_bunnynet', $video );
@@ -147,6 +147,7 @@ class BunnyNet {
 		$response   = false;
 		if ( $video_info ) {
 			$bunny_video_id = tutor_utils()->array_get( 'source_bunnynet', $video_info );
+			$bunny_video_id = str_replace( 'https://video.bunnycdn.com/play/', ' ', $bunny_video_id );
 			$video_source   = $video_info->source;
 			if ( 'bunnynet' === $video_source && '' !== $bunny_video_id ) {
 				$response = $bunny_video_id;
