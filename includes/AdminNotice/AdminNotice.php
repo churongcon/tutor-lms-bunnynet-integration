@@ -46,4 +46,39 @@ class AdminNotice {
 		$plugin_data = TutorLMSBunnyNetIntegration::meta_data();
 		require_once $plugin_data['views'] . '/notice/notice.php';
 	}
+
+	/**
+	 * Check whether Tutor core has required version installed
+	 *
+	 * @since v1.0.0
+	 *
+	 * @return bool | if has return true otherwise false
+	 */
+	public static function is_tutor_core_has_req_verion(): bool {
+		$meta_data = TutorLMSBunnyNetIntegration::meta_data();
+		$file_path   = WP_PLUGIN_DIR . '/tutor/tutor.php';
+
+		$plugin_data = get_file_data(
+			$file_path,
+			array(
+				'Version' => 'Version',
+			)
+		);
+
+		$tutor_version          = $plugin_data['Version'];
+		$tutor_core_req_version = $meta_data['tutor_req_ver'];
+		$is_compatible          = version_compare( $tutor_version, $tutor_core_req_version, '>=' );
+		return $is_compatible ? true : false;
+	}
+
+	/**
+	 * Check if Tutor file is available
+	 *
+	 * @since v1.0.0
+	 *
+	 * @return boolean
+	 */
+	public static function is_tutor_file_available(): bool {
+		return file_exists( WP_PLUGIN_DIR . '/tutor/tutor.php' );
+	}
 }

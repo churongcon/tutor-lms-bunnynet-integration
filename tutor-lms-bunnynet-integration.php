@@ -51,7 +51,7 @@ if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 		 * @return void
 		 */
 		public function __construct() {
-            if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+			if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 				include_once __DIR__ . '/vendor/autoload.php';
 			}
 			// register_activation_hook( __FILE__, array( __CLASS__, 'register_activation' ) );
@@ -69,14 +69,15 @@ if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 		 * @return array  contains plugin meta data
 		 */
 		public static function meta_data(): array {
-			self::$meta_data['url']       = plugin_dir_url( __FILE__ );
-			self::$meta_data['path']      = plugin_dir_path( __FILE__ );
-			self::$meta_data['basename']  = plugin_basename( __FILE__ );
-			self::$meta_data['templates'] = trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' );
-			self::$meta_data['views']     = trailingslashit( plugin_dir_path( __FILE__ ) . 'views' );
-			self::$meta_data['assets']    = trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' );
+			self::$meta_data['tutor_req_ver'] = '2.1.2';
+			self::$meta_data['url']           = plugin_dir_url( __FILE__ );
+			self::$meta_data['path']          = plugin_dir_path( __FILE__ );
+			self::$meta_data['basename']      = plugin_basename( __FILE__ );
+			self::$meta_data['templates']     = trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' );
+			self::$meta_data['views']         = trailingslashit( plugin_dir_path( __FILE__ ) . 'views' );
+			self::$meta_data['assets']        = trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' );
 
-            return self::$meta_data;
+			return self::$meta_data;
 		}
 
 		/**
@@ -98,9 +99,8 @@ if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 		 */
 		public function load_packages() {
 			// If tutor is not active then load notice only.
-			if ( ! function_exists( 'tutor' ) ) {
-				new AdminNotice();
-			} else {
+			new AdminNotice();
+			if ( function_exists( 'tutor' ) && AdminNotice::is_tutor_core_has_req_verion() ) {
 				new BunnyNet();
 			}
 		}
