@@ -5,7 +5,7 @@
 		"main": "gulp.js",
 		"scripts": {
 				"make-pot": "wp i18n make-pot . languages/tutor-lms-bunnynet-integration.pot --slug=tutor-lms-bunnynet-integration --exclude=.github,*.json,node_modules,vendor",
-        "build": "npm run make-pot && gulp build"
+        "build": "composer install --no-dev && npm run make-pot && gulp zip"
 		},
 		"author": "Themeum",
 		"license": "GPLv3",

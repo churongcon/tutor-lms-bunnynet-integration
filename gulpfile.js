@@ -141,4 +141,4 @@ gulp.task("watch", function () {
 });
 
 //exports.default 	= series(...task_keys, "watch");
-exports.build 		= series(cleanZip,cleanBuild,bundleFiles, exportZip);
+exports.zip 		= series(cleanZip,cleanBuild,bundleFiles, exportZip);
