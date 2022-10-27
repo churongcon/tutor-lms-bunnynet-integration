@@ -14,19 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 $tutor_basename = 'tutor/tutor.php';
 $source_file    = WP_PLUGIN_DIR . '/' . $tutor_basename;
 
-$action_btn   = '';
-$button_txt   = '';
-$button_class = '';
-
+$action_btn  = '';
 $plugin_data = TutorLMSBunnyNetIntegration::meta_data();
 
 if ( file_exists( $source_file ) && ! is_plugin_active( $tutor_basename ) ) {
 	$action_btn = 'activate_tutor_free';
-	$button_txt = __( 'Activate Tutor LMS', 'tutor-lms-bunnynet-integration' );
 } elseif ( ! file_exists( $source_file ) ) {
-	$action_btn   = 'install_tutor_plugin';
-	$button_txt   = __( 'Install Tutor LMS', 'tutor-lms-bunnynet-integration' );
-	$button_class = 'install-tbi-dependency-plugin-button';
+	$action_btn = 'install_tutor_plugin';
 }
 if ( $action_btn || ! AdminNotice::is_tutor_core_has_req_verion() ) :
 	?>
@@ -41,11 +35,15 @@ if ( $action_btn || ! AdminNotice::is_tutor_core_has_req_verion() ) :
 					<?php esc_html_e( 'Thanks for using Tutor LMS BunnyNet Integration', 'tutor-lms-bunnynet-integration' ); ?>
 				</h2>
 				<p>
-					<?php esc_html_e( 'To use Tutor LMS BunnyNet Integration, you must have installed & activated Tutor LMS Version ', 'tutor-lms-bunnynet-integration' ); ?>
-					<?php echo esc_html( "({$plugin_data['tutor_req_ver']})" );?>
+					<?php
+						$text  = _x( 'To use Tutor LMS BunnyNet Integration, you must have Tutor LMS ', 'Tutor LMS Require version', 'tutor-lms-bunnynet-integration' );
+						$text .= esc_html( 'v' . $plugin_data['tutor_req_ver'] );
+						$text .= _x( ' installed & activated.', 'Tutor LMS Require version', 'tutor-lms-bunnynet-integration' );
+						echo esc_html( $text );
+					?>
 				</p>
 				<a href="https://wordpress.org/plugins/tutor/" style="margin-right: 20px;">
-					<?php echo esc_html_e( 'Free installed and activated', 'tutor-lms-bunnynet-integration' ); ?>
+					<?php echo esc_html_e( 'Free install and activate', 'tutor-lms-bunnynet-integration' ); ?>
 				</a>
 				<a href="https://www.themeum.com/product/tutor-lms/" target="_blank">
 					<?php esc_html_e( 'Learn more about Tutor LMS', 'tutor-lms-bunnynet-integration' ); ?>
