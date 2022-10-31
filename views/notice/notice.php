@@ -22,7 +22,7 @@ if ( file_exists( $source_file ) && ! is_plugin_active( $tutor_basename ) ) {
 } elseif ( ! file_exists( $source_file ) ) {
 	$action_btn = 'install_tutor_plugin';
 }
-if ( $action_btn || ! AdminNotice::is_tutor_core_has_req_verion() ) :
+if ( $action_btn || ! AdminNotice::is_tutor_core_has_req_version() ) :
 	?>
 <div class="notice notice-error tbi-install-notice">
 	<div class="tbi-install-notice-inner" style="display:flex; gap: 20px; padding: 10px 0;">

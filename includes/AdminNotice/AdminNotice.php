@@ -54,7 +54,7 @@ class AdminNotice {
 	 *
 	 * @return bool | if has return true otherwise false
 	 */
-	public static function is_tutor_core_has_req_verion(): bool {
+	public static function is_tutor_core_has_req_version(): bool {
 		$meta_data = TutorLMSBunnyNetIntegration::meta_data();
 		$file_path   = WP_PLUGIN_DIR . '/tutor/tutor.php';
 

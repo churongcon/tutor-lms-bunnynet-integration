@@ -8,7 +8,7 @@
  * Author URI: https://themeum.com
  * Requires at least: 5.3
  * Tested up to: 6.0.3
- * License: GPLv2 or later
+ * License: GPLv3
  * Text Domain: tutor-lms-bunnynet-integration
  * Domain Path: /languages
  *
@@ -100,7 +100,7 @@ if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 		public function load_packages() {
 			// If tutor is not active then load notice only.
 			new AdminNotice();
-			if ( function_exists( 'tutor' ) && AdminNotice::is_tutor_core_has_req_verion() ) {
+			if ( function_exists( 'tutor' ) && AdminNotice::is_tutor_core_has_req_version() ) {
 				new BunnyNet();
 			}
 		}

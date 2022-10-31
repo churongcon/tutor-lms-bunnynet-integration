@@ -2,7 +2,7 @@
 Contributors: themeum
 Donate link: https://www.themeum.com
 Tags: tutor, lms, bunnynet, video, streaming
-Requires at least: 5.0
+Requires at least: 5.3
 Tested up to: 6.0.3
 Requires PHP: 7.4
 Stable tag: 1.0.0
