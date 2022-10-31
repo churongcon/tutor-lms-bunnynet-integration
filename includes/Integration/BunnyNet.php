@@ -34,6 +34,7 @@ class BunnyNet {
 		add_filter( 'tutor_course/single/video', __CLASS__ . '::filter_course_video' );
 		add_action( 'tutor_after_video_meta_box_item', __CLASS__ . '::meta_box_item' );
 		add_filter( 'should_tutor_load_template', __CLASS__ . '::filter_template_load', 99, 2 );
+		add_action( 'tutor_after_video_source_icon', __CLASS__ . '::video_source_icon' );
 	}
 
 	/**
@@ -124,7 +125,6 @@ class BunnyNet {
 				}
 
 				videoSource.onchange = (e) => {
-					alert(e.target.value);
 					if (e.target.value == 'bunnynet') {
 						icon.style = 'display:block;';
 					} else {
@@ -195,5 +195,17 @@ class BunnyNet {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Video source icon that will be visible on the
+	 * video source dropdown
+	 *
+	 * @since v1.0.0
+	 *
+	 * @return void
+	 */
+	public static function video_source_icon() {
+		echo '<i class="tutor-icon-video-camera-o" data-for="bunnynet"></i>';
 	}
 }

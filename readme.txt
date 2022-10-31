@@ -22,8 +22,8 @@ Tutor LMS BunnyNet integration allows you to host your lesson videos on Tutor LM
 For this integration, you will need to ensure a few plugins first. Of course, you would need both Tutor LMS and Tutor LMS Pro installed and activated.
 
 The required plugins are: 
-  * Tutor LMS v2.1.0 or later
-  * Tutor LMS Pro v2.1.0 or later
+  * Tutor LMS v2.1.2 or later
+
 
 = Get Started =
 
