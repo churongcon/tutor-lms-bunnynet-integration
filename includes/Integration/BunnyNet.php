@@ -48,7 +48,7 @@ class BunnyNet {
 	public static function filter_preferred_sources( array $video_source ): array {
 		$video_source['bunnynet'] = array(
 			'title' => __( 'BunnyNet', 'tutor-lms-bunnynet-integration' ),
-			'icon'  => 'code',
+			'icon'  => 'bunnynet',
 		);
 
 		return $video_source;
@@ -105,18 +105,34 @@ class BunnyNet {
 		$style           = 'bunnynet' === $video_source ? '' : 'display:none';
 		?>
 		<div class="tutor-mt-16 video-metabox-source-item video_source_wrap_bunnynet tutor-dashed-uploader" style="<?php echo esc_attr( $style ); ?>">
-			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place your bunnynet video code here', 'tutor-lms-bunnynet-integration' ); ?>">
+			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place Your BunnyNet Videos\'s Direct Play URL Here', 'tutor-lms-bunnynet-integration' ); ?>">
 		</div>
 		<script>
 			// Don't show input field if video source is not bunny net.
 			var bunnyNet = document.querySelector('.video_source_wrap_bunnynet');
 			var videoSource = document.querySelector('.tutor_lesson_video_source.no-tutor-dropdown');
+			var icon = document.querySelector('i[data-for=bunnynet]');
 			if (videoSource) {
-				console.log(videoSource.value);
-				if (videoSource.value == -1) {
+
+				if (videoSource.value != 'bunnynet') {
 					bunnyNet.style = 'display:none;'
 				}
+				if (videoSource.value == 'bunnynet') {
+					icon.style = 'display:block;';
+				} else {
+					icon.style.display = 'display:none;';
+				}
+
+				videoSource.onchange = (e) => {
+					alert(e.target.value);
+					if (e.target.value == 'bunnynet') {
+						icon.style = 'display:block;';
+					} else {
+						icon.style = 'display:none;';
+					}
+				}
 			}
+
 		</script>
 		<?php
 	}
