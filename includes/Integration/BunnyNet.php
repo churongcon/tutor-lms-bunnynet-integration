@@ -95,6 +95,7 @@ class BunnyNet {
 	 *
 	 * @since v1.0.0
 	 *
+	 * @param string $style display style.
 	 * @param object $post  post object.
 	 *
 	 * @return void
@@ -103,7 +104,6 @@ class BunnyNet {
 		$video           = maybe_unserialize( get_post_meta( $post->ID, '_video', true ) );
 		$video_source    = tutor_utils()->avalue_dot( 'source', $video, 'bunnynet' );
 		$bunnynet_source = tutor_utils()->avalue_dot( 'source_bunnynet', $video );
-		//$style           = 'bunnynet' === $video_source ? '' : 'display:none';
 		?>
 		<div class="tutor-mt-16 video-metabox-source-item video_source_wrap_bunnynet tutor-dashed-uploader" style="<?php echo esc_attr( $style ); ?>">
 			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place Your BunnyNet Videos\'s Direct Play URL Here', 'tutor-lms-bunnynet-integration' ); ?>">

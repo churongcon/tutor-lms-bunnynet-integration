@@ -43,7 +43,7 @@ if ( $action_btn || ! AdminNotice::is_tutor_core_has_req_version() ) :
 					?>
 				</p>
 				<a href="https://wordpress.org/plugins/tutor/" style="margin-right: 20px;">
-					<?php echo esc_html_e( 'Free install and activate', 'tutor-lms-bunnynet-integration' ); ?>
+					<?php esc_html_e( 'Free install and activate', 'tutor-lms-bunnynet-integration' ); ?>
 				</a>
 				<a href="https://www.themeum.com/product/tutor-lms/" target="_blank">
 					<?php esc_html_e( 'Learn more about Tutor LMS', 'tutor-lms-bunnynet-integration' ); ?>
