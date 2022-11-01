@@ -32,7 +32,7 @@ class BunnyNet {
 		add_filter( 'tutor_preferred_video_sources', __CLASS__ . '::filter_preferred_sources' );
 		add_filter( 'tutor_single_lesson_video', __CLASS__ . '::filter_lesson_video', 10, 3 );
 		add_filter( 'tutor_course/single/video', __CLASS__ . '::filter_course_video' );
-		add_action( 'tutor_after_video_meta_box_item', __CLASS__ . '::meta_box_item' );
+		add_action( 'tutor_after_video_meta_box_item', __CLASS__ . '::meta_box_item', 10, 2 );
 		add_filter( 'should_tutor_load_template', __CLASS__ . '::filter_template_load', 99, 2 );
 		add_action( 'tutor_after_video_source_icon', __CLASS__ . '::video_source_icon' );
 	}
@@ -99,25 +99,23 @@ class BunnyNet {
 	 *
 	 * @return void
 	 */
-	public static function meta_box_item( $post ):void {
+	public static function meta_box_item( $style, $post ):void {
 		$video           = maybe_unserialize( get_post_meta( $post->ID, '_video', true ) );
 		$video_source    = tutor_utils()->avalue_dot( 'source', $video, 'bunnynet' );
 		$bunnynet_source = tutor_utils()->avalue_dot( 'source_bunnynet', $video );
-		$style           = 'bunnynet' === $video_source ? '' : 'display:none';
+		//$style           = 'bunnynet' === $video_source ? '' : 'display:none';
 		?>
 		<div class="tutor-mt-16 video-metabox-source-item video_source_wrap_bunnynet tutor-dashed-uploader" style="<?php echo esc_attr( $style ); ?>">
 			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place Your BunnyNet Videos\'s Direct Play URL Here', 'tutor-lms-bunnynet-integration' ); ?>">
 		</div>
 		<script>
 			// Don't show input field if video source is not bunny net.
-			var bunnyNet = document.querySelectorAll('.video_source_wrap_bunnynet');
+			var bunnyNet = document.querySelector('.video_source_wrap_bunnynet');
 			var videoSource = document.querySelector('.tutor_lesson_video_source.no-tutor-dropdown');
 			var icon = document.querySelector('i[data-for=bunnynet]');
 			if (videoSource) {
 				if (videoSource.value != 'bunnynet') {
-					bunnyNet.forEach((item) => {
-						item.style = 'display:none;'
-					});
+					bunnyNet.style = 'display:none;'
 				}
 				
 				if (videoSource.value == 'bunnynet') {
@@ -127,10 +125,12 @@ class BunnyNet {
 				}
 
 				videoSource.onchange = (e) => {
+					console.log(e.target.value);
 					if (e.target.value == 'bunnynet') {
 						icon.style = 'display:block;';
 					} else {
 						icon.style = 'display:none;';
+						console.log('none');
 					}
 				}
 			}
