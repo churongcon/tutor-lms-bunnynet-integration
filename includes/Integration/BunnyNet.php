@@ -110,14 +110,16 @@ class BunnyNet {
 		</div>
 		<script>
 			// Don't show input field if video source is not bunny net.
-			var bunnyNet = document.querySelector('.video_source_wrap_bunnynet');
+			var bunnyNet = document.querySelectorAll('.video_source_wrap_bunnynet');
 			var videoSource = document.querySelector('.tutor_lesson_video_source.no-tutor-dropdown');
 			var icon = document.querySelector('i[data-for=bunnynet]');
 			if (videoSource) {
-
 				if (videoSource.value != 'bunnynet') {
-					bunnyNet.style = 'display:none;'
+					bunnyNet.forEach((item) => {
+						item.style = 'display:none;'
+					});
 				}
+				
 				if (videoSource.value == 'bunnynet') {
 					icon.style = 'display:block;';
 				} else {
@@ -132,7 +134,6 @@ class BunnyNet {
 					}
 				}
 			}
-
 		</script>
 		<?php
 	}
