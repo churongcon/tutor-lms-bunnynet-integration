@@ -74,7 +74,7 @@ The compatibility of Tutor LMS BunnyNet Integration plugin has come on Tutor LMS
 
 == Changelog ==
 
-= 1.0.0 - 01 November, 2021 =
+= 1.0.0 - 02 November, 2022 =
 
 * Initial Release
 
