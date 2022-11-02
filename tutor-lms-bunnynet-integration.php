@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Tutor LMS BunnyNet Integration
  * Plugin URI: https://www.themeum.com/product/tutor-lms/
- * Description: Tutor LMS BunnyNet integration allows you to host your lesson videos on Tutor LMS using BunnNets' very own Bunny Stream. Your students all around the world will face no trouble loading up and playing your meticulously crafted course videos. This enhances the experience for students and you can rest easy knowing your videos are being delivered as intended.
+ * Description: Tutor LMS BunnyNet integration allows you to host your lesson videos on Tutor LMS using BunnNets’ very own Bunny Stream. Use this integration to load up and play your meticulously crafted course videos to enhance the experience for students.
  * Author: Themeum
  * Version: 1.0.0
  * Author URI: https://themeum.com
@@ -54,9 +54,6 @@ if ( ! class_exists( 'TutorLMSBunnyNetIntegration' ) ) {
 			if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 				include_once __DIR__ . '/vendor/autoload.php';
 			}
-			// register_activation_hook( __FILE__, array( __CLASS__, 'register_activation' ) );
-			// register_deactivation_hook( __FILE__, array( __CLASS__, 'register_deactivation' ) );
-
 			add_action( 'plugins_loaded', array( $this, 'load_packages' ) );
 			add_action( 'init', array( __CLASS__, 'load_textdomain' ) );
 		}
