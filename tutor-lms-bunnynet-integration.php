@@ -7,7 +7,7 @@
  * Version: 1.0.0
  * Author URI: https://themeum.com
  * Requires at least: 5.3
- * Tested up to: 6.0.3
+ * Tested up to: 6.1
  * License: GPLv3
  * Text Domain: tutor-lms-bunnynet-integration
  * Domain Path: /languages
