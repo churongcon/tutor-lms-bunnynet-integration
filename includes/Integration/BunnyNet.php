@@ -106,7 +106,7 @@ class BunnyNet {
 		$bunnynet_source = tutor_utils()->avalue_dot( 'source_bunnynet', $video );
 		?>
 		<div class="tutor-mt-16 video-metabox-source-item video_source_wrap_bunnynet tutor-dashed-uploader" style="<?php echo esc_attr( $style ); ?>">
-			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place Your BunnyNet Videos\'s Direct Play URL Here', 'tutor-lms-bunnynet-integration' ); ?>">
+			<input class="tutor-form-control" type="text" name="video[source_bunnynet]" value="<?php echo esc_attr( $bunnynet_source ); ?>" placeholder="<?php esc_html_e( 'Place Your BunnyNet Videos\'s Iframe URL Here', 'tutor-lms-bunnynet-integration' ); ?>">
 		</div>
 		<script>
 			// Don't show input field if video source is not bunny net.
@@ -168,7 +168,6 @@ class BunnyNet {
 		$response   = false;
 		if ( $video_info ) {
 			$bunny_video_id = tutor_utils()->array_get( 'source_bunnynet', $video_info );
-			$bunny_video_id = str_replace( 'https://video.bunnycdn.com/play/', ' ', $bunny_video_id );
 			$video_source   = $video_info->source;
 			if ( 'bunnynet' === $video_source && '' !== $bunny_video_id ) {
 				$response = $bunny_video_id;
@@ -191,7 +190,7 @@ class BunnyNet {
 		?>
 		<div class="tutor-video-player">
 			<div style="position: relative; padding-top: 56.25%;">
-				<iframe src="https://iframe.mediadelivery.net/embed/<?php echo esc_attr( $bunny_video_id ); ?>?autoplay=false" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
+				<iframe src="<?php echo esc_attr( $bunny_video_id ); ?>" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
 			</div>
 		</div>
 		<?php
