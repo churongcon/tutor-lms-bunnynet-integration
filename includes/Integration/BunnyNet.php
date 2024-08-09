@@ -186,11 +186,13 @@ class BunnyNet {
 	 * @return string video content
 	 */
 	private static function get_embed_video( $bunny_video_id ):string {
+		// Ensure the URL uses the embed format
+    		$embed_url = str_replace('https://iframe.mediadelivery.net/play', 'https://iframe.mediadelivery.net/embed', $bunny_video_id);
 		ob_start();
 		?>
 		<div class="tutor-video-player">
 			<div style="position: relative; padding-top: 56.25%;">
-				<iframe src="<?php echo esc_attr( $bunny_video_id ); ?>" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
+				<iframe src="<?php echo esc_attr( $embed_url ); ?>" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
 			</div>
 		</div>
 		<?php
